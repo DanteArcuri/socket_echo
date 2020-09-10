@@ -122,6 +122,7 @@ int main (int argc, char *argv[]) {
   int quitProgram = 0;
   while (!quitProgram) {
     int connFd = 0;
+    struct sockaddr_in address; 
 
     DEBUG << "Calling accept(" << listenFd << "NULL,NULL)." << ENDL;
 
@@ -130,7 +131,7 @@ int main (int argc, char *argv[]) {
     // connection and return a file descriptor that you can read from and
     // write to. If there is no connection waiting accept() will block and
     // not return until there is a connection.
-    connFd = accept(listenFd,  (struct sockaddr *)&address, sizeof(servaddr));
+    connFd = accept(listenFd, (struct sockaddr *)&address, sizeof(servaddr));
     quitProgram = 1;
     
     DEBUG << "We have recieved a connection on " << connFd << ENDL;
