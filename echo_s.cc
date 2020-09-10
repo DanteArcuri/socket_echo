@@ -97,10 +97,8 @@ int main (int argc, char *argv[]) {
   DEBUG << "Calling bind(" << listenFd << "," << &servaddr << "," << sizeof(servaddr) << ")" << ENDL;
   int bindSuccesful = 0;
   while (!bindSuccesful) {
-    if (int bind(listenFd, servaddr, sizeof(servaddr)))
-    {
-      bindSuccesful = 1;
-    }
+
+    bindSuccesful = bind(listenFd, servaddr, sizeof(servaddr));
 
   }
   std::cout << "Using port " << port << std::endl;
@@ -132,7 +130,7 @@ int main (int argc, char *argv[]) {
     // connection and return a file descriptor that you can read from and
     // write to. If there is no connection waiting accept() will block and
     // not return until there is a connection.
-    connFd = accept(listenFd, servaddr, sizeof(servaddr));
+    connFd = accept(listenFd,  (struct sockaddr *)&address, sizeof(servaddr));
     quitProgram = 1;
     
     DEBUG << "We have recieved a connection on " << connFd << ENDL;
